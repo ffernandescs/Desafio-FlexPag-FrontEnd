@@ -36,7 +36,7 @@
   Para enviar requisição e receber resultados, foi ultilizado o Modulo HTTPCLient.
   
   ## 🎨 View
-![djongaplaylist](https://raw.githubusercontent.com/ffernandescs/Desafio-FlexPag-FrontEnd/main/src/assets/img/Anima%C3%A7%C3%A3o.gif?token=GHSAT0AAAAAAB2B2IAS4X7HIC3IDUD7KTROY2N2THA)
+![djongaplaylist](https://raw.githubusercontent.com/ffernandescs/Desafio-FlexPag-FrontEnd/main/src/assets/img/Anima%C3%A7%C3%A3o.gif?token=GHSAT0AAAAAAB2B2IASRL6CGYJS4XAZRJJGY2N4BFQ)
 
 ## 💻 Tecnologias
 As seguintes ferramentas foram usadas na construção do projeto:
