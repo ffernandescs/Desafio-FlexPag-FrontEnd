@@ -49,7 +49,7 @@ As seguintes ferramentas foram usadas na construção do projeto:
 - HTTP Angular
 
 ## 🌐 Link da Aplicação 
-<a href="https://coinshistory.netlify.app/" target="_blank" class="navbar-brand">
+<a href="https://coinshistory.netlify.app/" class="navbar-brand" target="_blank">
       <p>Acessar</p>
 </a>
 
