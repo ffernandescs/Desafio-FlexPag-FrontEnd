@@ -94,6 +94,7 @@ export class HomeComponent implements OnInit {
       let dataFormatOrFinal = moment(this.coin.dateFinal)
       .format('DD-MM-YYYY')
       this.handleError(dataFormatOrInitial, dataFormatOrFinal)
+      this.reset()
     }
     this.resetInput()
     const obs$ = interval((90000))
