@@ -100,6 +100,8 @@ input, label {
 }
 
 .loading {
+  overflow: hidden;
+  height: 300vh;
   position: absolute;
   top: 0;
   left: 0;
