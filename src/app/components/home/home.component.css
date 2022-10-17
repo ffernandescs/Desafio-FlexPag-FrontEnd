@@ -67,39 +67,37 @@ input, label {
 
 .form-control.ng-touched.ng-invalid {
   border:1px solid red;
- }
+}
 .form-select.ng-touched.ng-invalid {
   border:1px solid red;
- }
- .form-control.ng-touched.ng-valid {
+}
+.form-control.ng-touched.ng-valid {
   border:1px solid green;
- }
- .form-select.ng-touched.ng-valid {
+}
+.form-select.ng-touched.ng-valid {
   border:1px solid green;
- }
+}
 
- .inputTable.ng-touched.ng-invalid {
+.inputTable.ng-touched.ng-invalid {
   border:1px solid #dee2e6;
- }
+}
 
- .inputTable.ng-touched.ng-valid {
+.inputTable.ng-touched.ng-valid {
   border:1px solid #dee2e6;
- }
+}
 
- .table {
+.table {
   position: relative;
  }
 
-
-
- .table thead tr th {
+.table thead tr th {
   position: sticky;
   top: 0;
   visibility: hidden;
   opacity: 0;
   pointer-events: none;
   font-size: 0.8rem;
- }
+}
 
 .loading {
   position: absolute;
@@ -121,11 +119,6 @@ input, label {
     justify-content: flex-start !important;
     flex-direction: column;
   }
-
-  form .dropdown-menu {
-    width: 100%;
-  }
-
   .form-control {
     width: 100%;
   }

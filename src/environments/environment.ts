@@ -1,11 +1,14 @@
-import { HomeComponent } from './../app/components/home/home.component';
 // This file can be replaced during build by using the `fileReplacements` array.
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+export const API_LIST = "https://olinda.bcb.gov.br/olinda/servico/PTAX/versao/v1/odata"
+
+
 export const environment = {
-  production: false
-};
+    production: false,
+    projectName: "Desafio FlexPag"
+ }
 
 /*
  * For easier debugging in development mode, you can import the following file
@@ -16,5 +19,4 @@ export const environment = {
  */
 // import 'zone.js/plugins/zone-error';  // Included with Angular CLI.
 
-export const API = "https://olinda.bcb.gov.br/olinda/servico/PTAX/versao/v1/odata"
 
