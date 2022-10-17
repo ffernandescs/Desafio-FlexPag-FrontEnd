@@ -76,6 +76,8 @@ export class HomeComponent implements OnInit {
   */
 
   getValues() {
+    this.loading = true
+
     let dataFormatInitial = moment(this.coin.dateInitial)
     .format('MM-DD-YYYY')
     let dataFormatFinal = moment(this.coin.dateFinal)
@@ -94,6 +96,11 @@ export class HomeComponent implements OnInit {
       this.handleError(dataFormatOrInitial, dataFormatOrFinal)
     }
     this.resetInput()
+    const obs$ = interval((90000))
+    obs$.subscribe(() => {
+      this.loading = false
+    })
+
   }
 
   /*Recebe da api a lista de Sigla e nome de moedas onde este valor é inserido na tag select */
