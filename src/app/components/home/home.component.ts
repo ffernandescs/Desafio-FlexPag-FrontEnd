@@ -52,7 +52,16 @@ export class HomeComponent implements OnInit {
   /*Função para o botão 'Limpar Formulario'*/
   reset() {
     this.momentForm.reset()
+    this.resetInput()
   }
+
+  resetInput() {
+    this.searchCompra = ''
+    this.searchVenda = ''
+    this.searchText = ''
+  }
+
+
 
   /*Função que identifica se o Campo data inicial é maior que data Final e mostra um modal na tela */
 
@@ -84,6 +93,7 @@ export class HomeComponent implements OnInit {
       .format('DD-MM-YYYY')
       this.handleError(dataFormatOrInitial, dataFormatOrFinal)
     }
+    this.resetInput()
   }
 
   /*Recebe da api a lista de Sigla e nome de moedas onde este valor é inserido na tag select */
@@ -120,3 +130,4 @@ export class HomeComponent implements OnInit {
     this.validationInput()
   }
 }
+

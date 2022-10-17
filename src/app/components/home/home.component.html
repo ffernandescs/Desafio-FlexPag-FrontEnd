@@ -108,12 +108,13 @@
         <label
         for="validationCustom02" class="form-label">Cotação de compra:</label>
         <input
-          name="dateInitial"
+          name="searchCompra"
           type="text"
           class="form-control inputTable"
           value=""
           mask="0.000000"
-          [(ngModel)]="searchCompra">
+          [(ngModel)]="searchCompra"
+          >
       </div>
       <div class="col-md-4 input-filter">
         <label for="validationCustom02" class="form-label">Cotação de venda:</label>
@@ -129,7 +130,7 @@
       <div class="col-md-4 input-filter">
         <label for="validationCustom02" class="form-label">Data e hora da cotação:</label>
         <input
-          name="search"
+          name="searchText"
           type="datetime"
           class="form-control inputTable"
           value=""
