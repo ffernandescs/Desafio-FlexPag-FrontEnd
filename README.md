@@ -47,3 +47,9 @@ As seguintes ferramentas foram usadas na construção do projeto:
 - CSS
 - Moment.js
 - HTTP Angular
+
+## 🌐 Link da Aplicação 
+<a href="https://coinshistory.netlify.app/" target="_blank" class="navbar-brand">
+      <p>Acessar</p>
+</a>
+
