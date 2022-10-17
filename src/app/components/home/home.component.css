@@ -1,3 +1,70 @@
+.navbar a {
+  color: #FFF;
+  font-size: 1.4rem;
+}
+
+.navbar {
+  padding: 0.8rem 1.3rem;
+}
+
+.row {
+  padding: 1rem 0;
+  margin: 0;
+}
+
+.title {
+  width: 100%;
+  text-align: center;
+  padding-top: 2.5rem;
+}
+
+.title h1 {
+  font-size: 3rem;
+}
+
+.content-input {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.input-form {
+  width: 250px;
+  height: 5rem;
+}
+
+input, label {
+  font-size: 1rem;
+}
+
+.content-btn {
+  display: inline;
+  display: flex;
+  align-items: center;
+  padding-top: 1.3rem;
+}
+
+.btn {
+  width: 10rem;
+  height: auto;
+  font-size: 1rem;
+ }
+
+ .btn-form:nth-child(2) {
+  margin-left: 1rem;
+ }
+
+ .table-overflow {
+  max-height: calc(100vh - 30vh);
+  overflow-y: auto;
+  padding: 0;
+ }
+
+.tabela-Th {
+  width: 33.33%;
+}
+
 .form-control.ng-touched.ng-invalid {
   border:1px solid red;
  }
@@ -10,3 +77,100 @@
  .form-select.ng-touched.ng-valid {
   border:1px solid green;
  }
+
+ .inputTable.ng-touched.ng-invalid {
+  border:1px solid #dee2e6;
+ }
+
+ .inputTable.ng-touched.ng-valid {
+  border:1px solid #dee2e6;
+ }
+
+ .table {
+  position: relative;
+ }
+
+
+
+ .table thead tr th {
+  position: sticky;
+  top: 0;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  font-size: 0.8rem;
+ }
+
+.loading {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(51, 51, 51, 0.367);
+  z-index: 55;
+}
+
+@media (max-width: 750px) {
+  form {
+    align-items: flex-start !important;
+    justify-content: flex-start !important;
+    flex-direction: column;
+  }
+
+  form .dropdown-menu {
+    width: 100%;
+  }
+
+  .form-control {
+    width: 100%;
+  }
+
+  .input-form {
+    width: 100%;
+    min-height: 6rem;
+  }
+
+  .content-btn {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+    padding: 0;
+  }
+
+  .input-filter {
+    margin-bottom: 1.5rem;
+  }
+
+  .table-overflow {
+    max-height: calc(100vh - 45vh);
+  }
+
+  .table thead tr th {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+    background-color: #f2f2f2 ;
+   }
+}
+
+@media (max-width: 380px) {
+  .content-btn {
+    width: 100%;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1rem;
+    padding: 0;
+  }
+
+  .btn-form {
+    margin: 1rem 0 !important;
+   }
+}

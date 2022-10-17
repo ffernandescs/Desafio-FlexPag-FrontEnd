@@ -1,105 +1,170 @@
+<nav class="navbar navbar-dark bg-dark justify-content-between">
+  <div class="container-fluid">
+    <a href="" class="navbar-brand">
+      <i class="fa-solid fa-brazilian-real-sign"></i> Coins History
+    </a>
+  </div>
+
+</nav>
 <div class="container">
-  <nav class="navbar navbar-expand-lg bg-light">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">Navbar</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Dropdown
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Action</a></li>
-              <li><a class="dropdown-item" href="#">Another action</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
-            </ul>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled">Disabled</a>
-          </li>
-        </ul>
-        <form class="d-flex" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
+  <div class="title">
+    <h1>Historico de cotação</h1>
+  </div>
+  <div class="row">
+    <form
+      class="row gy-2 gx-3 align-items-end justify-content-between form dropdown"
+      (ngSubmit)="getValues()"
+      [formGroup]="momentForm"
+      #formDir="ngForm">
+      <div class="content-input">
+        <div class="col-auto input-form">
+          <label for="validationCustom04" class="form-label">Moeda:</label>
+          <select
+            class="form-select"
+            id="validationCustom04"
+            name="simbolo"
+            required
+            [(ngModel)]="coin.simbolo"
+            formControlName="coins">
+            <option  value=""></option>
+            <option
+              value=""
+              [ngValue]="simbolCoin.simbolo"
+              *ngFor="let simbolCoin of simbolCoins">
+              {{ simbolCoin.simbolo}} - {{simbolCoin.nomeFormatado}}
+              <img src="../../../assets/img/brazil.svg" alt="">
+            </option>
+          </select>
+          <div
+            class="text-danger"
+            *ngIf="coins.invalid && coins.touched">
+            <small class="">*Campo obrigatorio!</small>
+          </div>
+        </div>
+        <div class="col-auto input-form">
+          <label
+            class="form-label"
+            for="validationCustom01">
+            Data Inicial:
+          </label>
+          <input
+            name="dateInitial"
+            type="date"
+            class="form-control"
+            id="validationCustom01"
+            value=""
+            required
+            [(ngModel)]="coin.dateInitial"
+            formControlName="initialDt">
+          <div
+            class="text-danger"
+            *ngIf="initialDt.invalid && initialDt.touched">
+            <small class="">*Campo obrigatorio!</small>
+          </div>
+        </div>
+        <div class="col-auto input-form">
+          <label
+            class="form-label"
+            for="validationCustom02">
+            Data Final:
+          </label>
+          <input
+            class="form-control"
+            name="dateFinal"
+            type="date"
+            value=""
+            required
+            [(ngModel)]="coin.dateFinal"
+            formControlName="finalDt">
+          <div
+            class="validation-erro"
+            *ngIf="finalDt.invalid && finalDt.touched">
+            <small class="text-danger">*Campo obrigatorio!</small>
+          </div>
+        </div>
+        <div class="content-btn">
+          <div class="col-auto btn-form">
+            <button
+              class="btn btn-danger"
+              type="button"
+              (click)="reset()">
+              Limpar
+            </button>
+          </div>
+          <div class="col-auto btn-form">
+            <button
+              class="btn btn-primary"
+              type="submit"
+              [disabled]="momentForm.invalid">
+              Consultar Dados
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </form>
+    <div class="row">
+      <div class="col-md-4 input-filter">
+        <label
+        for="validationCustom02" class="form-label">Cotação de compra:</label>
+        <input
+          name="dateInitial"
+          type="text"
+          class="form-control inputTable"
+          value=""
+          mask="0.000000"
+          [(ngModel)]="searchCompra">
+      </div>
+      <div class="col-md-4 input-filter">
+        <label for="validationCustom02" class="form-label">Cotação de venda:</label>
+        <input
+          name="searchVenda"
+          name="dateFinal"
+          type="text"
+          class="form-control inputTable"
+          value=""
+          mask="0.000000"
+          [(ngModel)]="searchVenda">
+      </div>
+      <div class="col-md-4 input-filter">
+        <label for="validationCustom02" class="form-label">Data e hora da cotação:</label>
+        <input
+          name="search"
+          type="datetime"
+          class="form-control inputTable"
+          value=""
+          mask="0000-00-00 00:00:00.0000"
+          [(ngModel)]="searchText">
       </div>
     </div>
-  </nav>
-  <div class="row">
-    <form #box="ngForm" (ngSubmit)="getValues(box.value)" class="row g-3 needs-validation" [formGroup]="momentForm" #formDir="ngForm" novalidate>
-      <div class="col-md-3">
-        <label for="validationCustom04" class="form-label">Moeda</label>
-        <select [(ngModel)]="coin.simbolo" formControlName="coins" required name="simbolo" class="form-select" id="validationCustom04" >
-          <option  value=""></option>
-          <option *ngFor="let moeda of moedas" [ngValue]="moeda.simbolo" value="">{{ moeda.simbolo}} - {{moeda.nomeFormatado}}</option>
-        </select>
-        <div *ngIf="coins.invalid && coins.touched" class="text-danger">
-          <small class="">item obrigatorio</small>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <label for="validationCustom01" class="form-label">Data Inicial</label>
-        <input [(ngModel)]="coin.dateInitial" formControlName="initialDt" required name="dateInitial" type="date"  class="form-control" id="validationCustom01" value="">
-        <div *ngIf="initialDt.invalid && initialDt.touched" class="text-danger">
-          <small class="">item obrigatorio</small>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <label for="validationCustom02" class="form-label">Data Final</label>
-        <input [(ngModel)]="coin.dateFinal" formControlName="finalDt" required name="dateFinal" type="date" class="form-control" id="validationCustom02" value="">
-        <div *ngIf="finalDt.invalid && finalDt.touched" class="validation-erro">
-          <small class="text-danger">item obrigatorio</small>
-        </div>
-      </div>
-      <div class="col-12">
-        <button [disabled]="momentForm.invalid" class="btn btn-primary" type="submit">Consultar Dados</button>
-      </div>
-      <div class="col-12">
-        <button (click)="teste()" class="btn btn-primary" type="button">Atualizar Dados</button>
-      </div>
-    </form>
-    <div class="">
-      <table class="table">
-        <thead>
+    <div class="table-overflow">
+      <table class="table table-striped">
+        <thead >
           <tr>
-            <th scope="col">
-              <div class="col-md-4">
-                <label for="validationCustom02" class="form-label">Cotação de compra</label>
-                <input name="searchCompra" [(ngModel)]="searchCompra" name="dateInitial" type="text" class="form-control" id="validationCustom02" value="" mask="0.000000" >
-              </div>
+            <th class="tabela-Th" scope="col">
+              Cotação  de compra:
             </th>
-            <th scope="col">
-              <div class="col-md-4">
-                <label for="validationCustom02" class="form-label">Cotação de venda</label>
-                <input name="searchVenda" [(ngModel)]="searchVenda" name="dateFinal" type="text" class="form-control" id="validationCustom02" value="" mask="0.000000">
-              </div>
+            <th class="tabela-Th" scope="col">
+              Cotação  de venda:
             </th>
-            <th scope="col">
-              <div class="col-md-4">
-                <label for="validationCustom02" class="form-label">Data e hora da cotação</label>
-                <input  name="search" #myInput [(ngModel)]="searchText"  type="datetime" class="form-control" id="validationCustom02" value="" mask="0000-00-00 00:00:00.0000">
-              </div>
+            <th class="tabela-Th" scope="col">
+              Data e hora da cotação:
             </th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let historiCoin of historiCoins | filter:searchText | filter:searchVenda | filter:searchCompra">
-            <td>{{ historiCoin.cotacaoCompra }}</td>
-            <td>{{ historiCoin.cotacaoVenda }}</td>
-            <td>{{ historiCoin.dataHoraCotacao }}</td>
+            <td class="tabela-Th">{{ historiCoin.cotacaoCompra }}</td>
+            <td class="tabela-Th">{{ historiCoin.cotacaoVenda }}</td>
+            <td class="tabela-Th">{{ historiCoin.dataHoraCotacao }}</td>
           </tr>
         </tbody>
       </table>
+    </div>
+  </div>
+  <div class="loading" *ngIf="loading">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
     </div>
   </div>
 </div>

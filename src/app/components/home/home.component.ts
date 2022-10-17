@@ -1,8 +1,13 @@
-import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { AlertModalComponent } from 'src/app/shared/alert-modal/alert-modal.component';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { HistoryService } from 'src/app/service/history.service';
 import { HistoryCoin } from '../historyCoin';
-import { Moeda } from '../moeda';
+import { Coin } from '../coins';
+import { interval } from 'rxjs';
+import * as moment from 'moment'
+
 
 @Component({
   selector: 'app-home',
@@ -12,56 +17,83 @@ import { Moeda } from '../moeda';
 })
 export class HomeComponent implements OnInit {
 
-  moedas: Moeda[]
-  historiCoins: HistoryCoin[]
 
+  bsModalRef?: BsModalRef;
+  simbolCoins: Coin[]
+  historiCoins: HistoryCoin[]
   coin: any = {
     simbolo: '',
     dateInitial: '',
     dateFinal: '',
   }
-
   searchVenda: any
   searchCompra: any
   searchText: any
-
   momentForm!: FormGroup
   submitted: false
+  loading: boolean = true
+
+  todayDate = new Date()
+  result: string
 
   constructor(
     private service: HistoryService,
-    private formBuild: FormBuilder
-    ) { }
+    private formBuild: FormBuilder,
+    private modalService: BsModalService
+    ) {
 
-  teste() {
+      /*Faz aparecer um loading assim que a pagina é carregada */
+      const obs$ = interval((500))
+      obs$.subscribe((d) => {
+        this.loading = false
+      })
+    }
+
+  /*Função para o botão 'Limpar Formulario'*/
+  reset() {
+    this.momentForm.reset()
   }
 
-  getValues(val: []) {
-    let newDataInital = this.coin.dateInitial
-    let dataInital = newDataInital
-    let dataFormatInitial = dataInital.replace(/(\d*)-(\d*)-(\d*).*/, '$2-$3-$1');
-    console.log(dataFormatInitial, 'asd')
-    let newDataFinal = this.coin.dateFinal
-    let dataFinal = newDataFinal
-    let dataFormatFinal = dataFinal.replace(/(\d*)-(\d*)-(\d*).*/, '$2-$3-$1');
-    if(dataInital <= dataFinal) {
-      this.service.listSearch(this.coin.simbolo, dataFormatInitial, dataFormatFinal).subscribe(search => this.historiCoins = search.value)
+  /*Função que identifica se o Campo data inicial é maior que data Final e mostra um modal na tela */
+
+  handleError(dataI: string, dataF: string) {
+    this.bsModalRef = this.modalService.show(AlertModalComponent);
+    this.bsModalRef.content.type = 'danger';
+    this.bsModalRef.content.message = `Error: Data inicial (${dataI}) não pode ser maior que Data Final (${dataF})!`;
+  }
+
+  /*Função que lista valores de cotação de compra, venda e data em tabela
+  para solucionar o formato da data na API, utilizei do modulo moment.js
+  */
+
+  getValues() {
+    let dataFormatInitial = moment(this.coin.dateInitial)
+    .format('MM-DD-YYYY')
+    let dataFormatFinal = moment(this.coin.dateFinal)
+    .format('MM-DD-YYYY')
+
+    /*Aqui passei um condição, para identificar se a data inicial é maior que a data final
+    ou listar dados na tabela vindo da api.*/
+
+    if(dataFormatInitial <= dataFormatFinal) {
+      this.service.listSearch(this.coin.simbolo, dataFormatInitial, dataFormatFinal).subscribe(dados => this.historiCoins = dados.value)
     } else {
-      alert('Favor digite data Inicio maior que data Final ')
+      let dataFormatOrInitial = moment(this.coin.dateInitial)
+      .format('DD-MM-YYYY')
+      let dataFormatOrFinal = moment(this.coin.dateFinal)
+      .format('DD-MM-YYYY')
+      this.handleError(dataFormatOrInitial, dataFormatOrFinal)
     }
   }
 
-  getInputs() {
-
-  }
-
-  getData(val: string) {
-    this.service.listData(this.coin.simbolo, this.coin.dataInicial).subscribe(data => this.historiCoins = data.values)
-  }
+  /*Recebe da api a lista de Sigla e nome de moedas onde este valor é inserido na tag select */
 
   historyList() {
-    this.service.list().subscribe(dados => this.moedas = dados.value);
+    this.service.list()
+    .subscribe(dados => this.simbolCoins = dados.value);
   }
+
+  /*Função de validação de Campos, identifica se o mesmo foi preenchido ou não */
 
   validationInput() {
     this.momentForm = this.formBuild.group({
@@ -81,12 +113,10 @@ export class HomeComponent implements OnInit {
     return this.momentForm.get('finalDt')!;
   }
 
+  /*Função que inicia lista de sigla e validação de campos */
+
   ngOnInit(): void {
     this.historyList()
     this.validationInput()
-
   }
-
-
-
 }
