@@ -19,8 +19,8 @@
 
   Com base nestas informações, foi desenvolvido um site em Angular onde foi criado campos que recebe os seguintes valores:
   - Moeda
-  - Data de inicio
-  - Data Data Final
+  - Data de início
+  - Data Final
   
   Recebendo esses dados, a aplicação faz uma busca no endpoint e mostra em uma tabela com os seguintes dados:
   - Valor de compra
