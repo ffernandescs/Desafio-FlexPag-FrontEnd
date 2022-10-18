@@ -1,4 +1,4 @@
-# 🎶 Desafio FlexPag - FrontEnd
+# 💰 Desafio FlexPag - FrontEnd
 
 <p align="center">
   🚧 Projeto histórico de cotação de moedas | Concluído 🚀 🚧
